@@ -80,8 +80,9 @@ class App extends Component{
 
     return (
       <div className='App'>
-        <h1> Hello World </h1>
+        <h1> Welcome back Joey </h1>
         <h2> Today is {this.state.day}</h2>
+        <h3> Here is your schedule to consistently dwell with God today: </h3>
         <section className='schedule'>
           {table}
         </section>
