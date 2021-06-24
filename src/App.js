@@ -10,13 +10,11 @@ class App extends Component{
       day: '',
       time: '',
     }
-    this.calculateDate = this.calculateDate.bind(this);
-    this.updateDay = this.updateDay.bind(this);
-    this.updateTime = this.updateTime.bind(this);
-  }
 
-  updateDay(val){
-    this.setState({ day: val})
+    this.updateTime = this.updateTime.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.displayDay = this.displayDay.bind(this);
+    this.previousDay = this.previousDay.bind(this);
   }
 
   updateTime(){
@@ -36,43 +34,69 @@ class App extends Component{
     this.setState({ time });
   }
 
-  calculateDate(){
+  componentDidMount(){
     const date = new Date();
-    const day = date.getDay();
+    this.setState({ day: date.getDay() })
+    this.setTime();
+  }
 
+  displayDay(day){
     if (day === 0){
-      this.updateDay('Sunday');
+      return 'Sunday';
     } else if (day === 1){
-      this.updateDay('Monday');
+      return 'Monday';
     } else if (day === 2){
-      this.updateDay('Tuesday');
+      return 'Tuesday';
     } else if (day === 3){
-      this.updateDay('Wednesday');
+      return 'Wednesday';
     } else if (day === 4){
-      this.updateDay('Thursday');
+      return 'Thursday';
     } else if (day === 5){
-      this.updateDay('Friday');
+      return 'Friday';
     } else if (day === 6){
-      this.updateDay('Saturday');
+      return 'Saturday';
     } else {
       console.log(`Error! Create case to handle day number: ${day}`);
     }
-    
   }
 
-  componentDidMount(){
-    this.calculateDate();
-    this.setTime();
+  handleClick(){
+    const { day } = this.state;
+    let newDay = day;
+
+    if (day < 6){
+      newDay += 1;
+    } else {
+      newDay = 0;
+    }
+
+    this.setState({ day: newDay });
+    this.displayDay(newDay);
+  }
+
+  previousDay(){
+    const { day } = this.state;
+    let newDay = day;
+
+    if (day === 0){
+      newDay = 6;
+    } else {
+      newDay -= 1;
+    }
+
+    this.setState({ day: newDay });
+    this.displayDay(newDay);
   }
 
   render(){
     const { day } = this.state;
     let table;
-    if (day === 'Friday'){
+
+    if (day === 5){
       table = (<h1>'Its the weekend!'</h1>)
-    } else if (day === 'Saturday') {
+    } else if (day === 6) {
       table = (<h2> 'Its the weekend!'</h2>)
-    } else if (day === 'Sunday'){ 
+    } else if (day === 0){ 
       table = (<h2> 'Its the weekend!'</h2>)
     } else { 
       table = (<Table time={this.state.time}/>)
@@ -80,9 +104,13 @@ class App extends Component{
 
     return (
       <div className='App'>
-        <h1> Welcome back Joey </h1>
-        <h2> Today is {this.state.day}</h2>
-        <h3> Here is your schedule to consistently dwell with God today: </h3>
+        <h1 className='welcome'> Welcome back Joey </h1>
+        <section className='days'>
+          <button onClick={this.previousDay}>{`<`}</button>
+          <h2 className='day-string'> Today is <span className='day'>{this.displayDay(day)}</span></h2>
+          <button onClick={this.handleClick}>{`>`}</button>
+        </section>
+        <h3 className='intro'> Here is your schedule to consistently dwell with God today: </h3>
         <section className='schedule'>
           {table}
         </section>

@@ -5,7 +5,7 @@ const data = [
     },
     {
         time: '600 - 700',
-        activity: ['Prayer & Worship', 'Intercession', 'Meditation on Gospel reading', 'Consider how to apply/respond']
+        activity: 'Prayer & Worship / Intercession / Meditation on Gospel reading / Consider how to apply/respond',
     },
     {
         time: '700 - 755',
@@ -46,6 +46,14 @@ const data = [
     {
         time: '1545 - 1730',
         activity: 'Admin / Relational'
+    },
+    {
+        time: '1730 - 1815',
+        activity: 'Travel',
+    },
+    {
+        time: '1815 - 1850',
+        activity: 'Dinner',
     }
 ]
 
