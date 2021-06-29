@@ -2,6 +2,10 @@ import React from 'react';
 import data from './data'
 import './table.css';
 
+/** Need to add logic to account for different schedules on different days 
+ * Potentially component loads different data sources but uses similar logic across the board
+*/
+
 const Table = ({time}) => {
     const timeArray = data.map(day => {
         return day.time.split(' - ');
