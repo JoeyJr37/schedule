@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Table from './components/Table'
+import Scripture from './components/Scripture'
 
 class App extends Component{
   constructor(props){
@@ -9,6 +10,7 @@ class App extends Component{
     this.state = {
       day: '',
       time: '',
+      displayScripture: false,
     }
 
     this.updateTime = this.updateTime.bind(this);
@@ -88,6 +90,10 @@ class App extends Component{
     this.displayDay(newDay);
   }
 
+  displayScripture = () => {
+    this.setState({ displayScripture: true })
+  }
+
   render(){
     const { day } = this.state;
     let table;
@@ -110,6 +116,8 @@ class App extends Component{
           <h2 className='day-string'> Today is <span className='day'>{this.displayDay(day)}</span></h2>
           <button onClick={this.handleClick}>{`>`}</button>
         </section>
+        <button className='display-scripture' onClick={this.displayScripture}>Daily Scripture</button>
+        {this.state.displayScripture && <Scripture />}
         <h3 className='intro'> Here is your schedule to consistently dwell with God today: </h3>
         <section className='schedule'>
           {table}

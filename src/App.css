@@ -59,3 +59,14 @@ button {
   display: flex;
   align-items: center;
 }
+
+.display-scripture {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 2px 2px 3px black;
+}
+
+.display-scripture:hover {
+  cursor: pointer;
+}
